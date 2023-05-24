@@ -2,10 +2,16 @@
 //     name: string;
 //     age: number;
 // } = {
-const person = {
+const person: {
+  name: string;
+  age: number;
+  hobbies: string[];
+  role: [number, string]; // tuple
+} = {
   name: "Todd",
   age: 27,
   hobbies: ["Sports", "Cooking"],
+  role: [2, "author"],
 };
 
 let favoriteActivities: string[];
