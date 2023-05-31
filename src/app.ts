@@ -42,7 +42,7 @@ function extractAndConvert<T extends object, U extends keyof T>(
 
 extractAndConvert({ name: "Max" }, "name");
 
-class DataStorage<T extends string|number|boolean> {
+class DataStorage<T extends string | number | boolean> {
   private data: T[] = [];
 
   addItem(item: T) {
@@ -76,3 +76,22 @@ const numberStorage = new DataStorage<number>();
 // // ...
 // objStorage.removeItem(maxObj);
 // console.log(objStorage.getItems());
+
+interface CourseGoal {
+  title: string;
+  description: string;
+  completeUntil: Date;
+}
+
+function createCourseGoal(title: string, description: string, date: Date) {
+  let courseGoal: Partial<CourseGoal> = {};
+  courseGoal.title = "My Goal";
+  courseGoal.description = "My Goal Description";
+  courseGoal.completeUntil = new Date();
+
+  return courseGoal as CourseGoal;
+}
+
+const names: Readonly<string[]> = ["Max", "Anna"];
+// names.push("Manu");
+// names.pop();
