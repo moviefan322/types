@@ -9,3 +9,11 @@
 // promise.then((data) => {
 //     data.split(" ");
 // });
+
+function merge<S,U>(objA: S, objB: U) {
+    return Object.assign(objA, objB);
+  }
+  
+  const mergedObj = merge({ name: "Max" }, { age: 30 });
+
+
