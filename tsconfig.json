@@ -113,6 +113,6 @@
     "src/**/*" //default
   ],
   "files": [
-    "src/index.ts" //default
+    "src/app.ts" //default
   ]
 }
