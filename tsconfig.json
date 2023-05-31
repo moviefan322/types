@@ -111,8 +111,8 @@
   ],
   "include": [
     "src/**/*" //default
-  ],
+, "interface.ts"  ],
   "files": [
-    "src/interface.ts" //default
+    "interface.ts" //default
   ]
 }
