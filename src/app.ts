@@ -6,14 +6,19 @@ function Logger(logString: string) {
 }
 
 function WithTemplate(template: string, hookdId: string) {
-  return function (constructor: any) {
-    console.log("Rendering template");
-    const hookEl = document.getElementById(hookdId);
-    const p = new constructor();
-    if (hookEl) {
-      hookEl.innerHTML = template;
-      hookEl.querySelector("h1")!.textContent = p.name;
-    }
+    console.log("TEMPLATE FACTORY")
+  return function<T extends {new(...args: any[]): {name: string}}>(originalConstructor: T) {
+    return class extends originalConstructor {
+      constructor(..._: any[]) {
+        super();
+        console.log("Rendering template");
+        const hookEl = document.getElementById(hookdId);
+        if (hookEl) {
+          hookEl.innerHTML = template;
+          hookEl.querySelector("h1")!.textContent = this.name;
+        }
+      }
+    };
   };
 }
 
@@ -87,3 +92,6 @@ class Product {
     return this._price * (1 + tax);
   }
 }
+
+new Product("Book", 19);
+new Product("Book 2", 29);

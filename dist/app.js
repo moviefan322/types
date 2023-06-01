@@ -15,14 +15,19 @@ function Logger(logString) {
     };
 }
 function WithTemplate(template, hookdId) {
-    return function (constructor) {
-        console.log("Rendering template");
-        const hookEl = document.getElementById(hookdId);
-        const p = new constructor();
-        if (hookEl) {
-            hookEl.innerHTML = template;
-            hookEl.querySelector("h1").textContent = p.name;
-        }
+    console.log("TEMPLATE FACTORY");
+    return function (originalConstructor) {
+        return class extends originalConstructor {
+            constructor(..._) {
+                super();
+                console.log("Rendering template");
+                const hookEl = document.getElementById(hookdId);
+                if (hookEl) {
+                    hookEl.innerHTML = template;
+                    hookEl.querySelector("h1").textContent = this.name;
+                }
+            }
+        };
     };
 }
 let Person = class Person {
@@ -87,3 +92,5 @@ __decorate([
     Log3,
     __param(0, Log4)
 ], Product.prototype, "getPriceWithTax", null);
+new Product("Book", 19);
+new Product("Book 2", 29);
