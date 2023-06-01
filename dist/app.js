@@ -122,10 +122,18 @@ const button = document.querySelector("button");
 button.addEventListener("click", p.showMessage);
 const registeredValidators = {};
 function Required(target, propName) {
-    registeredValidators[target.constructor.name] = Object.assign(Object.assign({}, registeredValidators[target.constructor.name]), { [propName]: ["required"] });
+    var _a, _b;
+    registeredValidators[target.constructor.name] = Object.assign(Object.assign({}, registeredValidators[target.constructor.name]), { [propName]: [
+            ...((_b = (_a = registeredValidators[target.constructor.name]) === null || _a === void 0 ? void 0 : _a[propName]) !== null && _b !== void 0 ? _b : []),
+            "required",
+        ] });
 }
 function PositiveNumber(target, propName) {
-    registeredValidators[target.constructor.name] = Object.assign(Object.assign({}, registeredValidators[target.constructor.name]), { [propName]: ["positive"] });
+    var _a, _b;
+    registeredValidators[target.constructor.name] = Object.assign(Object.assign({}, registeredValidators[target.constructor.name]), { [propName]: [
+            ...((_b = (_a = registeredValidators[target.constructor.name]) === null || _a === void 0 ? void 0 : _a[propName]) !== null && _b !== void 0 ? _b : []),
+            "positive",
+        ] });
 }
 function validate(obj) {
     const objValidatorConfig = registeredValidators[obj.constructor.name];
@@ -136,10 +144,10 @@ function validate(obj) {
     for (const prop in objValidatorConfig) {
         for (const validator of objValidatorConfig[prop]) {
             switch (validator) {
-                case 'required':
+                case "required":
                     isValid = isValid && !!obj[prop];
                     break;
-                case 'positive':
+                case "positive":
                     isValid = isValid && obj[prop] > 0;
                     break;
             }
